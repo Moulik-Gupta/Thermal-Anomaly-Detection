@@ -26,12 +26,13 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
 3. Install dependencies:
 ```bash
-pip install requests pandas folium
+pip install -r requirements.txt
 ```
 
-4. Get your NASA FIRMS API key:
-   - Visit https://firms.modaps.eosdis.nasa.gov/map_keys/
-   - Replace the API_KEY in `thermal_anomaly/fetch_firms.py` with your key
+4. Configure your NASA FIRMS API key:
+   - Copy `thermal_anomaly/config.example.py` to `thermal_anomaly/config.py`
+   - Get your API key from https://firms.modaps.eosdis.nasa.gov/map_keys/
+   - Replace `YOUR_API_KEY_HERE` in `config.py` with your actual key
 
 ## Usage
 
@@ -50,18 +51,22 @@ Open `hotspot_map.html` in your browser to explore the detected hotspots.
 
 ## Configuration
 
-Edit `fetch_firms.py` to customize:
+Edit `thermal_anomaly/config.py` to customize:
+- `API_KEY` - Your NASA FIRMS API key
 - `SOURCE` - Satellite data source (default: VIIRS_NOAA20_NRT)
 - `DAYS` - Number of days to fetch (default: 5)
-- `india_bbox` - Geographic bounding box for the region
+- `INDIA_BBOX` - Geographic bounding box for the region
 
 ## Project Structure
 
 ```
 SIH/
 ├── thermal_anomaly/
-│   └── fetch_firms.py    # Main script
+│   ├── fetch_firms.py       # Main script
+│   ├── config.example.py    # Configuration template
+│   └── config.py            # Your configuration (not tracked)
 ├── .gitignore
+├── requirements.txt
 └── README.md
 ```
 

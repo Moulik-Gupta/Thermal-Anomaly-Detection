@@ -3,18 +3,14 @@ import pandas as pd
 import folium
 from io import StringIO
 import sys
-from datetime import datetime, timedelta
 
-  # ============================================================
-  # NASA FIRMS API Configuration
-  # ============================================================
-  # Replace the placeholder below with your actual FIRMS API key
-  # Get your key at: https://firms.modaps.eosdis.nasa.gov/map_keys/
-  # ============================================================
-API_KEY = "71c3562c8af6e931bbd83c3aa93660fc"
-# FIRMS API settings
-SOURCE = "VIIRS_NOAA20_NRT"     # Updated satellite source
-DAYS = 5                         # Last 5 days of data
+try:
+    from config import API_KEY, SOURCE, DAYS, INDIA_BBOX
+except ImportError:
+    print("\n[ERROR] config.py not found!")
+    print("Please create config.py from config.example.py")
+    print("and add your NASA FIRMS API key.")
+    sys.exit(1)
 
 def fetch_firms_data():
     """Fetch thermal anomaly data from NASA FIRMS API."""
@@ -25,19 +21,15 @@ def fetch_firms_data():
     print("=" * 60)
 
     if API_KEY == "YOUR_API_KEY_HERE":
-          print("\n[ERROR] Please replace 'YOUR_API_KEY_HERE' in the script")
+          print("\n[ERROR] Please replace 'YOUR_API_KEY_HERE' in config.py")
           print("        with your actual FIRMS API key.")
           print("        Get one at: https://firms.modaps.eosdis.nasa.gov/map_keys/")
           sys.exit(1)
 
-      # India bounding box: [lat_min, lon_min, lat_max, lon_max]
-      # India approximately:6.5°N to 35.5°N, 68°E to 97.5°E
-    india_bbox = "68,6.5,97.5,35.5"
-
       # Build the API URL using area endpoint instead of country
     url = (
           f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/"
-          f"{API_KEY}/{SOURCE}/{india_bbox}/{DAYS}"
+          f"{API_KEY}/{SOURCE}/{INDIA_BBOX}/{DAYS}"
       )
 
     print(f"\n[1/4] Fetching data from NASA FIRMS...")
