@@ -44,3 +44,4 @@ config.py
 # OS
 .DS_Store
 Thumbs.db
+get-pip.py
