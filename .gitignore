@@ -37,6 +37,12 @@ env/
 *.csv
 *.html
 
+# Satellite imagery (large files)
+thermal_anomaly/satellite_images/
+*.png
+*.tiff
+*.tif
+
 # API Keys (security)
 config.py
 .env
