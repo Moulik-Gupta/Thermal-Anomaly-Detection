@@ -51,3 +51,6 @@ config.py
 .DS_Store
 Thumbs.db
 get-pip.py
+
+#classification files
+classification_summary.txt
